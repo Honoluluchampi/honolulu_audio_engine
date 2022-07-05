@@ -1,7 +1,12 @@
 # Honolulu Audio Engine
 
 ## usage
-- You have to manage the index of audios as `Hae::BufferId` type.
+- Audio data creation 
+  - Take your audio data as `std::vector<ALshort>` or `std::array<ALshort, *>` and so on.
+  - 
+- Manage the index of your audios as `Hae::BufferId` by yourself, because your
+audio will be assigned to a buffer through its id.
+- Register your audio to Engine's buffer by specifying the buffer
 
 <details><summary>sample</summary>
 
@@ -9,11 +14,11 @@
 
 ```
 
-<detalis>
+</details>
 
 ## functions
 
-- void register_monaural_audio(BufferId buffer_id, SourceId source_id, int freq, ALshort *data_ptr)
+- void bind_audio_to_buffer(BufferId buffer_id, SourceId source_id, int freq, ALshort *data_ptr)
   
 You should choose buffer_id of the sounds
 
@@ -30,3 +35,8 @@ cd build
 cmake ..
 make
 ```
+
+## code convention
+- snake_case : filename_name, variable_name, 
+- CAPITAL_SNAKE_CASE : MACRO, CONSTANT
+- CamelCase : ClassName

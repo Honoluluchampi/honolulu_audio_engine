@@ -1,4 +1,5 @@
 #include <hae.hpp>
+#include <hae_audio_data.hpp>
 
 // std
 #include <cassert>
@@ -14,20 +15,26 @@ Hae::Hae()
   alcMakeContextCurrent(context_);
 }
 
-void Hae::register_monaural_audio
-(BufferId buffer_id, SourceId source_id, int freq, ALshort *data_ptr)
+void Hae::bind_audio_to_buffer(const HaeAudioData& audio_data)
 {
+  auto buffer_id = audio_data.buffer_id();
   // adjust buffer count
   if (buffer_id >= buffer_ids_.size())
     // TODO : configure allocation count e.g. buffer_id * 2
-    buffer_ids_.resize(buffer_id);
+    buffer_ids_.resize(buffer_id * 2);
 
   // create buffer
   alGenBuffers(1, &buffer_ids_[buffer_id]);
+
+  // copy the data to the buffer
+  alBufferData(buffer_id,
+               audio_data.format(),
+               audio_data.data(),
+               audio_data.data_size_in_byte(),
+               audio_data.frequency());
 }
 
-void Hae::register_stereo_audio
-(BufferId id, SourceId source, int freq, ALshort *right_data_ptr, ALshort *left_data_ptr)
+void Hae::register_stereo_audio(const HaeAudioData& audio_data)
 {
 
 }

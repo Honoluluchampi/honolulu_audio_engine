@@ -1,29 +1,27 @@
 #pragma once
 
-// openAL
-#include <AL/al.h>
-#include <AL/alc.h>
-
 // std
 #include <vector>
 #include <memory>
 
+// openAL
+#include <AL/al.h>
+#include <AL/alc.h>
+
 // honolulu_audio_engine
 namespace hae {
+
+// forward declaration
+class HaeAudioData;
 
 class Hae
 {
   public:
-    using BufferId = size_t;
-    using SourceId = size_t;
-
     Hae();
 
-    void register_monaural_audio
-    (BufferId buffer_id, SourceId source_id, int freq, ALshort *data_ptr);
+    void bind_audio_to_buffer(const HaeAudioData& audio_data);
 
-    void register_stereo_audio
-    (BufferId buffer_id, SourceId source_id, int freq, ALshort *right_data_ptr, ALshort *left_data_ptr);
+    void register_stereo_audio(const HaeAudioData& audio_data);
 
   private:
     // openAL resources
