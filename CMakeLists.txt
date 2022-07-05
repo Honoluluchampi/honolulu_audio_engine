@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-add_definitions(-std=c++20)
+add_definitions(-std=c++2a)
 
 # build example
 project(honolulu_audio_engine)
@@ -19,9 +19,6 @@ target_link_libraries(hae PUBLIC openal)
 project(test_run)
 # enable google test
 enable_testing()
-find_package(GTest REQUIRED)
-include(GoogleTest)
 add_executable(test_run test/test.cpp)
 target_link_directories(test_run PUBLIC ../build)
-target_link_libraries(test_run hae GTest::GTest GTest::Main)
-gtest_discover_tests(test_run)
+target_link_libraries(test_run hae gtest gtest_main pthread)
