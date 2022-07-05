@@ -12,7 +12,7 @@ target_link_libraries(honolulu_audio_engine hae)
 # build honolulu_audio_engine
 project(hae)
 add_library(hae STATIC src/hae.cpp)
-target_include_directories(hae PUBLIC include /usr/local/include)c
+target_include_directories(hae PUBLIC include /usr/local/include)
 target_link_libraries(hae PUBLIC openal)
 
 # build test
