@@ -1,5 +1,0 @@
-if(EXISTS "/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/test/test_run[1]_tests.cmake")
-  include("/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/test/test_run[1]_tests.cmake")
-else()
-  add_test(test_run_NOT_BUILT test_run_NOT_BUILT)
-endif()

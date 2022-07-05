@@ -1,9 +1,0 @@
-/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/CMakeFiles/honolulu_audio_engine.dir
-/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/CMakeFiles/edit_cache.dir
-/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/CMakeFiles/rebuild_cache.dir
-/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/engine/CMakeFiles/hae.dir
-/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/engine/CMakeFiles/edit_cache.dir
-/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/engine/CMakeFiles/rebuild_cache.dir
-/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/test/CMakeFiles/test_run.dir
-/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/test/CMakeFiles/edit_cache.dir
-/home/honolulu/programs/external_libraries/honolulu_audio_engine/build/test/CMakeFiles/rebuild_cache.dir
