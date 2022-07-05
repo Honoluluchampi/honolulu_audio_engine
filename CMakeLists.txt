@@ -1,11 +1,15 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(al VERSION 0.1.0)
+project(honolulu_audio_engine)
 
-add_executable(al src/main.cpp src/hae.cpp)
+add_definitions(-std=c++20)
 
-target_include_directories(al PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-        )
+set(SOURCE_FILES example.cpp)
+add_executable(honolulu_audio_engine ${SOURCE_FILES})
 
-target_link_libraries(al PUBLIC openal)
+target_include_directories(honolulu_audio_engine PUBLIC engine/include)
+
+add_subdirectory(engine)
+add_subdirectory(test)
+
+target_link_libraries(honolulu_audio_engine hae)
