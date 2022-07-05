@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-add_definitions(-std=c++20)
+add_definitions(-std=c++2a)
 
 # build example
 project(honolulu_audio_engine)
