@@ -1,5 +1,5 @@
-#include <hae.hpp>
-#include <hae_audio_data.hpp>
+#include "hae.hpp"
+#include "hae_audio_data.hpp"
 
 // std
 #include <cassert>
@@ -15,7 +15,7 @@ Hae::Hae()
   alcMakeContextCurrent(context_);
 }
 
-void Hae::bind_audio_to_buffer(const HaeAudioData& audio_data)
+void Hae::bind_audio_to_buffer(const HaeAudioData &audio_data)
 {
   auto buffer_id = audio_data.buffer_id();
   // adjust buffer count
@@ -34,7 +34,7 @@ void Hae::bind_audio_to_buffer(const HaeAudioData& audio_data)
                audio_data.frequency());
 }
 
-void Hae::register_stereo_audio(const HaeAudioData& audio_data)
+void Hae::register_stereo_audio(const HaeAudioData &audio_data)
 {
 
 }
