@@ -8,7 +8,7 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 
-// honolulu_audio_engine
+// engine
 namespace hae {
 
 // forward declaration

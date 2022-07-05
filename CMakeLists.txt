@@ -4,12 +4,12 @@ project(honolulu_audio_engine)
 
 add_definitions(-std=c++20)
 
-set(SOURCE_FILES main.cpp)
-add_executable(honolulu_audio_engine_run ${SOURCE_FILES})
+set(SOURCE_FILES example.cpp)
+add_executable(honolulu_audio_engine ${SOURCE_FILES})
 
-include_directories(honolulu_audio_engine)
+target_include_directories(honolulu_audio_engine PUBLIC engine/include)
 
-add_subdirectory(honolulu_audio_engine)
-add_subdirectory(honolulu_audio_engine_test)
+add_subdirectory(engine)
+add_subdirectory(test)
 
-target_link_libraries(honolulu_audio_engine_run honolulu_audio_engine)
+target_link_libraries(honolulu_audio_engine hae)
