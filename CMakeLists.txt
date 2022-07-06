@@ -19,6 +19,6 @@ target_link_libraries(hae PUBLIC openal)
 project(test_run)
 # enable google test
 enable_testing()
-add_executable(test_run test/test.cpp)
+add_executable(test_run test/hae_test.cpp test/hae_audio_data_test.cpp)
 target_link_directories(test_run PUBLIC ../build)
 target_link_libraries(test_run hae gtest gtest_main pthread)
