@@ -24,8 +24,8 @@ int main()
 
   // audio data creation
   audio_data
-    .set_frequency(freq)
-    .set_format(AL_FORMAT_MONO16)
+    .set_sampling_rate(freq)
+    .set_sampling_rate(AL_FORMAT_MONO16)
     .set_data(std::move(audio));
 
   audio_engine.bind_audio_to_buffer(audio_data);
