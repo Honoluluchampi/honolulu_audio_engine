@@ -4,10 +4,27 @@ add_definitions(-std=c++2a)
 
 # for OS X
 if(APPLE)
-    set(OPEN_AL_VERSION 1.22.2)
-    set(OPEN_AL_DIRECTORY /usr/local/Cellar/openal-soft/${OPEN_AL_VERSION})
-    set(GOOGLE_TEST_VERSION 1.12.1)
-    set(GOOGLE_TEST_DIRECTORY /usr/local/Cellar/googletest/${GOOGLE_TEST_VERSION})
+    # search brew's root
+    execute_process(
+        COMMAND brew --prefix
+        RESULT_VARIABLE BREW
+        OUTPUT_VARIABLE BREW_PREFIX
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    execute_process(
+        COMMAND ls ${BREW_PREFIX}/Cellar/openal-soft
+        RESULT_VARIABLE OPEN_AL
+        OUTPUT_VARIABLE OPEN_AL_VERSION
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    execute_process(
+        COMMAND ls ${BREW_PREFIX}/Cellar/googletest
+        RESULT_VARIABLE GOOGLE_TEST
+        OUTPUT_VARIABLE GOOGLE_TEST_VERSION
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    set(OPEN_AL_DIRECTORY ${BREW_PREFIX}/Cellar/openal-soft/${OPEN_AL_VERSION})
+    set(GOOGLE_TEST_DIRECTORY ${BREW_PREFIX}/Cellar/googletest/${GOOGLE_TEST_VERSION})
 endif(APPLE)
 
 # build example
@@ -35,7 +52,7 @@ elseif (UNIX)
 endif(APPLE)
 # openAL
 if (APPLE)
-    target_link_directories(hae PUBLIC /usr/local/Cellar/openal-soft/1.22.2/lib)
+    target_link_directories(hae PUBLIC ${OPEN_AL_DIRECTORY}/lib)
 endif (APPLE)
 target_link_libraries(hae PUBLIC openal)
 
