@@ -27,4 +27,7 @@ TEST(audio_data, setter_getter)
     eq(*data.data(), 1000);
     eq(data.sampling_rate(), 22050);
     eq(data.format(), AL_FORMAT_MONO8);
+    eq(data.buffer_id(), 1);
+  // ALshort is 16-bit
+    eq(data.data_size_in_byte(), 3 * 2);
 }
