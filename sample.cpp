@@ -14,7 +14,7 @@ int main()
   HaeAudioData audio_data;
 
   // audio creation
-  const size_t freq = 44100;
+  const unsigned int freq = 44100;
   const float pitch = 440.0f;
   const float duration = 2.0f;
   std::vector<ALshort> audio(freq * duration);
@@ -24,7 +24,7 @@ int main()
 
   // audio data creation
   audio_data
-    .set_frequency(freq)
+    .set_sampling_rate(freq)
     .set_format(AL_FORMAT_MONO16)
     .set_data(std::move(audio));
 
