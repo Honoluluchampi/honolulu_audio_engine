@@ -31,7 +31,7 @@ void Hae::bind_audio_to_buffer(const HaeAudioData &audio_data)
                audio_data.format(),
                audio_data.data(),
                audio_data.data_size_in_byte(),
-               audio_data.frequency());
+               audio_data.sampling_rate());
 }
 
 void Hae::register_stereo_audio(const HaeAudioData &audio_data)
