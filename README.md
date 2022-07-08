@@ -1,5 +1,8 @@
 # Honolulu Audio Engine
 
+[![build_on_ubuntu](https://github.com/Honoluluchampi/honolulu_audio_engine/actions/workflows/build_on_ubuntu.yml/badge.svg)](https://github.com/Honoluluchampi/honolulu_audio_engine/actions/workflows/build_on_ubuntu.yml)
+[![build_on_mac](https://github.com/Honoluluchampi/honolulu_audio_engine/actions/workflows/build_on_mac.yml/badge.svg)](https://github.com/Honoluluchampi/honolulu_audio_engine/actions/workflows/build_on_mac.yml)
+
 ## usage
 - Audio data creation 
   - Take your audio data as `std::vector<ALshort>` or `std::array<ALshort, *>` and so on.
