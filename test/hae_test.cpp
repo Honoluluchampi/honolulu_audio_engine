@@ -4,10 +4,12 @@
 // hae
 #include <hae.hpp>
 
+#define eq EXPECT_EQ
+
+using namespace hae;
+
 TEST(Test, test)
 {
-  int i = 0;
-  EXPECT_EQ(i, 0);
-  i++;
-  EXPECT_EQ(i, 1);
+  Hae engine;
+    eq(engine.remaining_pending_sources_count(), hae::SOURCE_COUNT);
 }
