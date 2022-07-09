@@ -1,10 +1,10 @@
-#include "hae.hpp"
-#include "hae_audio_data.hpp"
-
-// std
-#include <cassert>
+#include <hae.hpp>
+#include <hae_audio_data.hpp>
 
 namespace hae {
+
+// define statice members
+std::queue<SourceId> Hae::pending_source_ids_;
 
 Hae::Hae()
 {
@@ -46,7 +46,7 @@ Result Hae::bind_audio_to_buffer(HaeAudioData &audio_data)
 
   // change audio_data's state
   audio_data.set_buffer_id(buffer_id);
-  audio_data.set_bound_to_buffer(true);
+  audio_data.set_is_bound_to_buffer(true);
 
   return Result::SUCCESS;
 }
@@ -67,8 +67,46 @@ Result Hae::bind_buffer_to_source(HaeAudioData &audio_data)
 
   // change audio_data's state
   audio_data.set_source_id(source_id);
-  audio_data.set_bound_to_source(true);
+  audio_data.set_is_bound_to_source(true);
 
   return Result::SUCCESS;
 }
+
+Result Hae::remove_audio_resources(HaeAudioData& audio_data)
+{
+  // remove source
+  if (audio_data.is_bound_to_source()) {
+    remove_audio_from_source(audio_data);
+  }
+
+  // remove buffer
+  if (audio_data.is_bound_to_buffer()) {
+    auto buffer = audio_data.buffer_id();
+    alDeleteBuffers(1, &buffer);
+    audio_data.set_is_bound_to_source(false);
+  }
+
+  return Result::SUCCESS;
+}
+
+Result Hae::remove_audio_from_source(HaeAudioData& audio_data)
+{
+  // remove the audio from  the source
+  alSourcei(audio_data.source_id(), AL_BUFFER, 0);
+
+  // change the audio_data's state
+  audio_data.set_is_bound_to_source(false);
+
+  // make the source pending
+  pending_source_ids_.push(audio_data.source_id());
+
+  return Result::SUCCESS;
+}
+
+void Hae::play_audio_from_source(SourceId source_id)
+{ alSourcePlay(source_id); }
+
+void Hae::stop_audio_from_source(SourceId source_id)
+{ alSourceStop(source_id); }
+
 } // namespace hae
