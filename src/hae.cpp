@@ -3,11 +3,14 @@
 
 namespace hae {
 
-// define statice members
+// define static members
 std::queue<SourceId> Hae::pending_source_ids_;
+ALCdevice*  Hae::device_ = nullptr;
+ALCcontext* Hae::context_ = nullptr;
 
-Hae::Hae()
+void Hae::start_hae_context()
 {
+  if (device_ || context_) return;
   // initialize openAL
   device_ = alcOpenDevice(nullptr);
   // TODO : configure context's attributes
@@ -17,12 +20,12 @@ Hae::Hae()
   // create pending sources
   SourceId sources[SOURCE_COUNT];
   alGenSources(SOURCE_COUNT, sources);
-  for (int i = 0; i < SOURCE_COUNT; i++) {
-    pending_source_ids_.push(sources[i]);
+  for (const auto& source : sources) {
+    pending_source_ids_.push(source);
   }
 }
 
-Hae::~Hae()
+void Hae::kill_hae_context()
 {
   // delete openAL resources
   alcMakeContextCurrent(nullptr);
@@ -102,11 +105,5 @@ Result Hae::remove_audio_from_source(HaeAudioData& audio_data)
 
   return Result::SUCCESS;
 }
-
-void Hae::play_audio_from_source(SourceId source_id)
-{ alSourcePlay(source_id); }
-
-void Hae::stop_audio_from_source(SourceId source_id)
-{ alSourceStop(source_id); }
 
 } // namespace hae
