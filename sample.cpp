@@ -11,7 +11,6 @@ using namespace hae;
 
 int main()
 {
-  Hae hae;
   Hae::start_hae_context();
 
   // raw audio creation

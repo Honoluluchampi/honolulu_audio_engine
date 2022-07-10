@@ -13,7 +13,7 @@ class HaeAudioData
 {
   public:
     explicit HaeAudioData(ALenum format = AL_FORMAT_MONO16, ALsizei sampling_rate = 44100)
-      : format_(format), sampling_rate_(sampling_rate) { static hae::BufferId i = 0; buffer_id_ = i++; }
+      : format_(format), sampling_rate_(sampling_rate) {}
 
     // setter (enable chain notation)
     // complete transport std::vector<ALshort>
@@ -38,12 +38,12 @@ class HaeAudioData
 
   private:
     BufferId buffer_id_;
-    bool is_bound_to_buffer_;
+    bool is_bound_to_buffer_ = false;
     SourceId source_id_;
-    bool is_bound_to_source_;
+    bool is_bound_to_source_ = false;
 
-    ALenum format_;
     std::vector<ALshort> data_;
+    ALenum format_;
     ALsizei sampling_rate_;
 };
 } // namespace hae

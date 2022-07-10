@@ -86,7 +86,7 @@ Result Hae::remove_audio_resources(HaeAudioData& audio_data)
   if (audio_data.is_bound_to_buffer()) {
     auto buffer = audio_data.buffer_id();
     alDeleteBuffers(1, &buffer);
-    audio_data.set_is_bound_to_source(false);
+    audio_data.set_is_bound_to_buffer(false);
   }
 
   return Result::SUCCESS;
