@@ -1,7 +1,7 @@
 #pragma once
 
 // std
-#include <vector>
+#include <queue>
 #include <memory>
 
 // openAL
@@ -14,21 +14,36 @@ namespace hae {
 // forward declaration
 class HaeAudioData;
 
+using BufferId = ALuint;
+using SourceId = ALuint;
+
+constexpr size_t SOURCE_COUNT = 4;
+
+// represents hae process's result state
+enum class Result { SUCCESS, FAILURE };
+
 class Hae
 {
   public:
-    Hae();
+    static void start_hae_context();
+    static void kill_hae_context();
 
-    void bind_audio_to_buffer(const HaeAudioData& audio_data);
+    // audio process functions
+    static Result bind_audio_to_buffer(HaeAudioData& audio_data);
+    static Result bind_buffer_to_source(HaeAudioData& audio_data);
+    static Result remove_audio_resources(HaeAudioData& audio_data);
+    static Result remove_audio_from_source(HaeAudioData& audio_data);
+    inline static void play_audio_from_source(SourceId source_id) { alSourcePlay(source_id); }
+    inline static void stop_audio_from_source(SourceId source_id) { alSourceStop(source_id); }
 
-    void register_stereo_audio(const HaeAudioData& audio_data);
+    // getter
+    static size_t remaining_pending_sources_count() { return pending_source_ids_.size(); }
 
   private:
     // openAL resources
-    std::vector<ALuint> buffer_ids_;
-    std::vector<ALuint> source_ids_;
+    static std::queue<SourceId> pending_source_ids_;
 
-    ALCdevice *device_;
-    ALCcontext *context_;
+    static ALCdevice* device_;
+    static ALCcontext* context_;
 };
 } // namespace hae

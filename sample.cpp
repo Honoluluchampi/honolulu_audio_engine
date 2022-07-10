@@ -1,4 +1,5 @@
 // std
+#include <thread>
 #include <cmath>
 #include <limits>
 
@@ -10,23 +11,29 @@ using namespace hae;
 
 int main()
 {
-  Hae audio_engine;
-  HaeAudioData audio_data;
+  Hae::start_hae_context();
 
-  // audio creation
+  // raw audio creation
   const unsigned int freq = 44100;
   const float pitch = 440.0f;
   const float duration = 2.0f;
-  std::vector<ALshort> audio(freq * duration);
+  std::vector<ALshort> audio(static_cast<size_t>(freq * duration));
   for (int i = 0; i < audio.size(); i++) {
-    audio[i] = std::sin(pitch * M_PI * 2.0 * i / freq) * std::numeric_limits<ALshort>::max();
+    audio[i] = std::sin(pitch * M_PI * 2.0 * i / freq)
+      * std::numeric_limits<ALshort>::max();
   }
 
   // audio data creation
+  HaeAudioData audio_data;
   audio_data
     .set_sampling_rate(freq)
     .set_format(AL_FORMAT_MONO16)
     .set_data(std::move(audio));
 
-  audio_engine.bind_audio_to_buffer(audio_data);
+  Hae::bind_audio_to_buffer(audio_data);
+  Hae::bind_buffer_to_source(audio_data);
+  Hae::play_audio_from_source(audio_data.source_id());
+  std::this_thread::sleep_for(std::chrono::seconds(2));
+
+  Hae::kill_hae_context();
 }
